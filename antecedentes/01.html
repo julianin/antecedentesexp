@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+	<title>pagina con video</title>
+ 	<meta name="viewport" content="width=1280, userscale=no, target-densitydpi=device-dpi" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../estilo.css"/>
+	<script type="text/javascript" charset="utf-8" src="../phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../videoplayer.js"></script>
+   	<script type="text/javascript">
+    function agrandar(){VideoPlayer.play('/android_asset/www/antecedentes/media/v_antecedentes_01.mp4');}
+    function ampliar() {
+       		var e = document.getElementById("granderizable");
+     		  if(e.style.display == 'block')
+          		e.style.display = 'none';
+     		  else
+        		e.style.display = 'block';}
+	</script>
+</head>
+
+<body background="fondo.jpg">
+<!-- Elementos a cambiar: -->
+	<pec><a href="#" onClick="ampliar();"><img src="imagenes/i_ant_01.jpg" width="400" height="250" /></a></pec>
+    <gran id="granderizable" ><a href="#" onClick="ampliar();"><img src="imagenes/i_ant_01.jpg" width="1280" height="800" /></a></gran>
+    <badel><a href="02.html"><img src="../botones/badel.jpg" width="100" height="100"/></a></badel>
+	<btras><a href="01.html"><img src="../botones/btras.jpg" width="100" height="100" /></a></btras>
+    <titulo>"La Virgen entronizada con el Niño y rodeada de ángeles músicos"</p> Blasco de Grañen</titulo>
+	<txt>Es una pintura al temple de gran calidad del pintor aragonés Blasco de Grañén. Fue la tabla central de un retablo aragonés, y corresponde al llamado estilo gótico internacional, de hacia 1450. El Niño Jesús, que lleva un pajarito en una mano, está sentado en las rodillas de la Virgen y le mira.</p>
+Una serie de ángeles músicos rodean escalonadamente el trono sobre en el que está sentada María y hacen sonar instrumentos (cistro, flauta, arpa gótica y laud) en su honor. Otros dos ángeles llevan filacterias con textos del "Gloria" que aparece en el Evangelio de San Lucas y del Salmo 50.</p>
+El refinamiento, la elegancia y el lujo del gótico internacional se reflejan en la riqueza ornamental, realizada con estucos en relieve y dorados, de la corona de la Virgen, de los nimbos de los ángeles, de la orla y broche del manto de María, así como en el esgrafiado del fondo.</txt>
+    
+<!-- hasta aqui -->    
+    
+    <bvolver><a href="submenu.html"><img src="../botones/bamenu.jpg" width="100" height="100" /></a></bvolver>
+    <boton><a href="submenu.html"><img src="../botones/bmuseo.jpg" width="100" height="100" /></a></boton>
+	<baudio><a href="#" onclick="agrandar();" ><img src="../botones/bplay.jpg" width="100" height="100"  /></a></baudio>
+  	
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+	<title>pagina con audio</title>
+ 	<meta name="viewport" content="width=1280, userscale=no, target-densitydpi=device-dpi" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../estilo.css"/>
+	<script type="text/javascript" charset="utf-8" src="../phonegap.js"></script>
+    <script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+    var my_media = null;
+    var mediaTimer = null;
+	var reproduciendo = false; 
+	var mindur = 0;
+	var secpos = 0;
+	var secdur = 0;
+	var minpos = 0;
+	function playAudio(direccion) {
+            if (my_media == null) {my_media = new Media(direccion);}
+			if (reproduciendo) {
+                my_media.pause();
+				document.getElementById('imagenaudio').src = "../botones/baudio.jpg";
+				reproduciendo=false;}
+			else {my_media.play(); 
+				document.getElementById('imagenaudio').src = "../botones/bpause.jpg";
+				reproduciendo=true;}			
+			if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                   	my_media.getCurrentPosition(
+                        function(position) {if (position > -1) {setAudioPosition((position));}},
+                        function(e) {console.log("Error getting pos=" + e); setAudioPosition("Error: " + e);}
+                   		 );
+               		}, 1000);
+				}
+			}
+		
+		function zeroPad(num, places) {
+  			var zero = places - num.toString().length + 1;
+ 			return Array(+(zero > 0 && zero)).join("0") + num;
+			}
+		
+		function setAudioPosition(position) {
+			minpos= Math.floor(position/60);
+			secpos=Math.floor(position%60);
+			secdur=Math.floor(my_media.getDuration()%60);
+			if (position<0) 
+			{document.getElementById('recorrido').innerHTML =" ";
+			document.getElementById('imagenaudio').src = "../botones/baudio.jpg";} 
+			else 
+			{document.getElementById('recorrido').innerHTML = minpos+":"+zeroPad(secpos,2)+"/"+Math.floor(my_media.getDuration()/60)+":"+zeroPad(secdur,2);}
+		}
+    </script>       
+	<script type="text/javascript">			
+    function ampliar() {
+       		var e = document.getElementById("granderizable");
+     		  if(e.style.display == 'block')
+          		e.style.display = 'none';
+     		  else
+        		e.style.display = 'block';}
+	</script>
+</head>
+
+<body background="fondo.jpg">
+<!-- Elementos a cambiar: -->
+	<pec><a href="#" onClick="ampliar();"><img src="imagenes/i_ant_04.jpg" width="400" height="250" /></a></pec>
+    <gran id="granderizable" ><a href="#" onClick="ampliar();"><img src="imgenes/i_ant_04.jpg" width="1280" height="800" /></a></gran>
+    <badel><a href="05.html"><img src="../botones/badel.jpg" width="100" height="100"/></a></badel>
+	<btras><a href="03.html"><img src="../botones/btras.jpg" width="100" height="100" /></a></btras>
+    
+    <baudio><a href="#" onclick="playAudio('/android_asset/www/antecedentes/media/a_ant_04.mp3');" ><img  src="../botones/baudio.jpg" width="100" height="100" id="imagenaudio" /></a></baudio>
+    <titulo>"La Virgen con el Niño"</p>Guillaume Benson</titulo>
+	<txt>
+"La Virgen con el Niño", obra de un pintor seguidor de Guillaume Benson, es una imagen que tuvo mucho éxito en Flandes y en España, por el elevado número de copias que se hicieron. Una de ellas, de gran belleza y calidad, atribuida a Guillaume Benson, fue traída de Flandes por don Martín de Gurrea y Aragón, duque de Villahermosa, y se conserva en el Museo de Zaragoza, procedente del monasterio de Veruela. Otra es ésta que procede de la colección de Ibercaja.</p>
+La pintura, muy estirada y esmaltada, a la manera flamenca en los siglos XV y XVI, muestra a la Virgen abrazando amorosamente al Niño. El jarrón de cristal con rosas sobre la mesa, no sólo sirve para ambientar la escena de interior, sino que posee un claro simbolismo religioso: el jarrón alude a la pureza inmaculada de Maria, y las rosas de varios colores a los misterios del Rosario, rezo devocional católico dedicado a María como mediadora y corredentora del género humano.
+    </txt>   
+<!-- hasta aqui -->    
+    
+    <bvolver><a href="submenu.html"><img src="../botones/bamenu.jpg" width="100" height="100" /></a></bvolver>
+    <boton><a href="submenu.html"><img src="../botones/bmuseo.jpg" width="100" height="100" /></a></boton>
+  	<tiempo id="recorrido"></tiempo>
+    
+</body>
+</html>

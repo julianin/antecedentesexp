@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+<style>
+
+boton {
+    position: fixed;
+    left: 45px;
+    top: 50px;
+}
+badel{
+    position: fixed;
+    left: 1130px;
+    top: 50px;
+}
+baudio{ position: fixed;
+    left: 1130px;
+    top: 425px;}
+	
+btras{
+    position: fixed;
+    top: 175px;
+    left: 1130px;
+}
+bvolver{
+	position:fixed;
+	left: 1130px;
+	top:300px;}
+pec{
+    position: fixed;
+    top: 50px;
+    left: 190px;
+}
+gran{
+	display:none;
+	position:fixed;
+	left:0px;
+	top:0px;
+	z-index:100;}
+
+tiempo{position:fixed; 
+	top:550px; 
+	left:1130px; 
+	font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
+	font-size: 15px; 
+	font-style: normal; 
+	font-variant: normal; 
+	color:#FFF; 
+	line-height: 15px;
+	width: 100px; 
+	height: 40px;
+	overflow-y: auto; 
+	background:#000000; 
+	border:#000000;
+	text-align:center;
+	}
+
+txt{position:fixed; 
+	top:320px; 
+	left:190px; 
+	font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
+	font-size: 30px; 
+	font-style: normal; 
+	font-variant: normal; 
+	color:#FFF; 
+	line-height: 40px;
+	width: 900px; 
+	height: 413px;
+	overflow-y: auto; 
+	background:#000000; 
+	border:#000000;
+	text-align:justify;
+	}
+titulo{
+	position:fixed; 
+	top:50px; 
+	left:700px; 
+	font-family: Futura, 'Trebuchet MS', Arial, sans-serif; 
+	font-size: 30px; font-style: normal;
+	font-variant: normal; color:#999999;
+	line-height: 33px;
+	width: 400px; 
+	height: 300px;
+	background:#000000; 
+	border:#000000; 
+	text-align:right;}
+
+boton {
+    position: fixed;
+    left: 45px;
+    top: 50px;
+}
+/* CSS Document */
+

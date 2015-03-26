@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+	<title>pagina con audio</title>
+ 	<meta name="viewport" content="width=1280, userscale=no, target-densitydpi=device-dpi" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../estilo.css"/>
+	<script type="text/javascript" charset="utf-8" src="../phonegap.js"></script>
+    <script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+    var my_media = null;
+    var mediaTimer = null;
+	var reproduciendo = false; 
+	var mindur = 0;
+	var secpos = 0;
+	var secdur = 0;
+	var minpos = 0;
+	function playAudio(direccion) {
+            if (my_media == null) {my_media = new Media(direccion);}
+			if (reproduciendo) {
+                my_media.pause();
+				document.getElementById('imagenaudio').src = "../botones/baudio.jpg";
+				reproduciendo=false;}
+			else {my_media.play(); 
+				document.getElementById('imagenaudio').src = "../botones/bpause.jpg";
+				reproduciendo=true;}			
+			if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                   	my_media.getCurrentPosition(
+                        function(position) {if (position > -1) {setAudioPosition((position));}},
+                        function(e) {console.log("Error getting pos=" + e); setAudioPosition("Error: " + e);}
+                   		 );
+               		}, 1000);
+				}
+			}
+		
+		function zeroPad(num, places) {
+  			var zero = places - num.toString().length + 1;
+ 			return Array(+(zero > 0 && zero)).join("0") + num;
+			}
+		
+		function setAudioPosition(position) {
+			minpos= Math.floor(position/60);
+			secpos=Math.floor(position%60);
+			secdur=Math.floor(my_media.getDuration()%60);
+			if (position<0) 
+			{document.getElementById('recorrido').innerHTML =" ";
+			document.getElementById('imagenaudio').src = "../botones/baudio.jpg";} 
+			else 
+			{document.getElementById('recorrido').innerHTML = minpos+":"+zeroPad(secpos,2)+"/"+Math.floor(my_media.getDuration()/60)+":"+zeroPad(secdur,2);}
+		}
+    </script>       
+	<script type="text/javascript">			
+    function ampliar() {
+       		var e = document.getElementById("granderizable");
+     		  if(e.style.display == 'block')
+          		e.style.display = 'none';
+     		  else
+        		e.style.display = 'block';}
+	</script>
+</head>
+
+<body background="fondo.jpg">
+<!-- Elementos a cambiar: -->
+	<pec><a href="#" onClick="ampliar();"><img src="imagenes/i_ant_17.jpg" width="400" height="250" /></a></pec>
+    <gran id="granderizable" ><a href="#" onClick="ampliar();"><img src="imgenes/i_ant_17.jpg" width="1280" height="800" /></a></gran>
+    <badel><a href="18.html"><img src="../botones/badel.jpg" width="100" height="100"/></a></badel>
+	<btras><a href="16.html"><img src="../botones/btras.jpg" width="100" height="100" /></a></btras>
+    
+    <baudio><a href="#" onclick="playAudio('/android_asset/www/antecedentes/media/a_ant_17.mp3');" ><img  src="../botones/baudio.jpg" width="100" height="100" id="imagenaudio" /></a></baudio>
+    <titulo>"Bodegón de un búcaro con flores"</p>Francisco de Zurbarán o Juan Fernández "El Labrador"</titulo>
+	<txt>
+El Bodegón de un búcaro con flores, un plato de peltre con melocotones, dos libros, una taza con agua, rosas y un rosario es un bodegón español de comienzos del Barroco, que puede ser tanto de Francisco de Zurbarán en su primera época en Llerena, hacia 1625, o del enigmático bodegonista Juan Fernández llamado "El Labrador", natural del pueblo cacereño de Jaraicejo, que pudo formarse con Zurbarán antes de especializarse en la pintura de bodegones.</p>
+Dos de los objetos que aparecen en este bodegón serían vueltos a pintar por esos pintores. El motivo de la taza con agua y la rosa sobre un plato de peltre, lo pintó Zurbarán en 1626 sobre una mesa el cuadro de la "Curación milagrosa del beato Reginaldo de Orleans", que formó parte de una serie sobre la vida de Santo Domingo para el convento de San Pablo de Sevilla, y después, hacia 1633 en otras dos pinturas. El búcaro con lirios blancos, rosas y claveles rojos, fue repetido, con mucha mayor calidad, por Juan Fernández "El Labrador" en el bodegón que estuvo atribuido a Zurbarán y que posee el Museo del Prado, fechable hacia 1635-36.</p>
+Si Fernández se hubiera formado con Zurbarán en Llerena, bien pudo hacer este bodegón, tomando el motivo de la taza de su maestro, hacia 1626-1629. Por lo tanto, estamos ante un bodegón tan interesante iconográfica y simbólicamente, como de autoría todavía no fijada, pero que se mueve en ese ámbito artístico de Zurbarán joven.</p>
+Más allá del naturalismo tenebrista con que están representados los objetos, este bodegón está cargado de simbolismo religioso, desde la taza blanca con agua, que representa la pureza inmaculada de la Virgen, y que también es "Rosa Mística"; pasando por el jarrón de flores, con lirios blancos de pureza virginal, y claveles rojos de la Pasión de Cristo; por los libros de devoción cerrados; hasta el Rosario terminado en su Crucifijo que cuelga junto al cortinaje, y que también hacen alusión a la Pasión y Muerte de Cristo.
+    </txt>   
+<!-- hasta aqui -->    
+    
+    <bvolver><a href="submenu.html"><img src="../botones/bamenu.jpg" width="100" height="100" /></a></bvolver>
+    <boton><a href="submenu.html"><img src="../botones/bmuseo.jpg" width="100" height="100" /></a></boton>
+  	<tiempo id="recorrido"></tiempo>
+    
+</body>
+</html>

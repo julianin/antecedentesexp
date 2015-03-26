@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+	<title>pagina con audio</title>
+ 	<meta name="viewport" content="width=1280, userscale=no, target-densitydpi=device-dpi" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../estilo.css"/>
+	<script type="text/javascript" charset="utf-8" src="../phonegap.js"></script>
+    <script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+    var my_media = null;
+    var mediaTimer = null;
+	var reproduciendo = false; 
+	var mindur = 0;
+	var secpos = 0;
+	var secdur = 0;
+	var minpos = 0;
+	function playAudio(direccion) {
+            if (my_media == null) {my_media = new Media(direccion);}
+			if (reproduciendo) {
+                my_media.pause();
+				document.getElementById('imagenaudio').src = "../botones/baudio.jpg";
+				reproduciendo=false;}
+			else {my_media.play(); 
+				document.getElementById('imagenaudio').src = "../botones/bpause.jpg";
+				reproduciendo=true;}			
+			if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                   	my_media.getCurrentPosition(
+                        function(position) {if (position > -1) {setAudioPosition((position));}},
+                        function(e) {console.log("Error getting pos=" + e); setAudioPosition("Error: " + e);}
+                   		 );
+               		}, 1000);
+				}
+			}
+		
+		function zeroPad(num, places) {
+  			var zero = places - num.toString().length + 1;
+ 			return Array(+(zero > 0 && zero)).join("0") + num;
+			}
+		
+		function setAudioPosition(position) {
+			minpos= Math.floor(position/60);
+			secpos=Math.floor(position%60);
+			secdur=Math.floor(my_media.getDuration()%60);
+			if (position<0) 
+			{document.getElementById('recorrido').innerHTML =" ";
+			document.getElementById('imagenaudio').src = "../botones/baudio.jpg";} 
+			else 
+			{document.getElementById('recorrido').innerHTML = minpos+":"+zeroPad(secpos,2)+"/"+Math.floor(my_media.getDuration()/60)+":"+zeroPad(secdur,2);}
+		}
+    </script>       
+	<script type="text/javascript">			
+    function ampliar() {
+       		var e = document.getElementById("granderizable");
+     		  if(e.style.display == 'block')
+          		e.style.display = 'none';
+     		  else
+        		e.style.display = 'block';}
+	</script>
+</head>
+
+<body background="fondo.jpg">
+<!-- Elementos a cambiar: -->
+	<pec><a href="#" onClick="ampliar();"><img src="imagenes/i_ant_18.jpg" width="400" height="250" /></a></pec>
+    <gran id="granderizable" ><a href="#" onClick="ampliar();"><img src="imgenes/i_ant_18.jpg" width="1280" height="800" /></a></gran>
+    <badel><a href="19.html"><img src="../botones/badel.jpg" width="100" height="100"/></a></badel>
+	<btras><a href="17.html"><img src="../botones/btras.jpg" width="100" height="100" /></a></btras>
+    
+    <baudio><a href="#" onclick="playAudio('/android_asset/www/antecedentes/media/a_ant_18.mp3');" ><img  src="../botones/baudio.jpg" width="100" height="100" id="imagenaudio" /></a></baudio>
+    <titulo>"Cascadas de Tívoli con un rebaño"</p>Philipp Peter Roos</titulo>
+	<txt>
+El alemán Philipp Peter Roos es el autor de Cascadas de Tívoli con un rebaño. El pintor se estableció en 1684 con su familia en una casa cercana a Tívoli, bello pueblo situado cerca de Roma, por lo que sería desde entonces llamado Rosa de Tívoli. Allí se especializó en paisajes naturalistas, casi siempre con rebaños de corderos y cabras en primer plano, como en este ejemplo.</p>
+La gran cascada sobre el río Aniene, que se precipita desde los montes Simburini cerca de Tívoli, antes de bajar a la campiña romana y desembocar en el Tíber, es la protagonista del cuadro. Pintado este paisaje de atardecer con sueltas pinceladas, los efectos de claroscuro en las rocas y la vegetación son rotundos y realistas. En primer plano pintó Roos un pastor tumbado que vigila a su rebaño de vacas, ovejas y cabras, mientras contempla tan soberbio espectáculo de la naturaleza.
+
+    </txt>   
+<!-- hasta aqui -->    
+    
+    <bvolver><a href="submenu.html"><img src="../botones/bamenu.jpg" width="100" height="100" /></a></bvolver>
+    <boton><a href="submenu.html"><img src="../botones/bmuseo.jpg" width="100" height="100" /></a></boton>
+  	<tiempo id="recorrido"></tiempo>
+    
+</body>
+</html>
